@@ -1,0 +1,22 @@
+{
+  "name": "project-spoti-youtube-api",
+  "version": "1.0.0",
+  "description": "Npm for my 1st year project at uni",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "S0me60dy",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "corss": "^2.8.5",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "query-string": "^9.0.0"
+  }
+}

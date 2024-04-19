@@ -1,0 +1,18 @@
+<%- include("./partials/header.ejs") %>
+
+<% if(!locals.playlists){ %>
+    <h1>Ciao</h1>
+<% } else { %>
+    <div class="dropdown">
+        <button class="dropbtn">Your Playlists</button>
+        <div class="dropdown-content">
+            <% playlists.forEach(playlist => { %>
+                <a href="/playlist-tracks/<%= playlist.id %>"><%= playlist.name %></a>
+            <% }); %>
+        </div>
+    </div>
+    
+    
+<% } %>
+
+<%- include("./partials/footer.ejs") %>

@@ -1,0 +1,13 @@
+<%- include("./partials/header.ejs") %>
+
+<% if(!locals.tracks){ %>
+    <h1>Ciao</h1>
+<% } else { %>
+    <ul>
+        <% tracks.forEach(track => { %>
+            <li> <%= track.name %> by <%= track.artist %> </li>
+        <% }); %>
+    </ul>
+<% } %>
+
+<%- include("./partials/footer.ejs") %>

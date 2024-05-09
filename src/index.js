@@ -6,14 +6,15 @@ import cors from "cors"
 import session from "express-session"
 import router from "./routes/get_playlists.js"
 import getTracksRouter from './routes/get_tracks.js'
+import dotenv from 'dotenv'
 
-
+dotenv.config();
 
 const app = express();
 const port = 5000;
 
-const client_id = "c8c7c9e55b8643d2aafe5836521054ec";
-const client_secret = "8dd6666c0de84430b47af93bb1005fcd";
+const client_id = process.env.SPOTIFY_CLIENT_ID;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const REDIRECT_URI = `http://localhost:${port}/callback`
 const AUTH_URL = "https://accounts.spotify.com/authorize"
 const TOKEN_URL = "https://accounts.spotify.com/api/token"

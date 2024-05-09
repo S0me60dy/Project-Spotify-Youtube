@@ -3,11 +3,16 @@
 <% if(!locals.tracks){ %>
     <h1>Ciao</h1>
 <% } else { %>
-    <ul>
+    <form action="/save-tracks" method="POST">
         <% tracks.forEach(track => { %>
-            <li> <%= track.name %> by <%= track.artist %> </li>
+            <div class="">
+                <input type="checkbox" name="selectedTracks" value="<%= track.name %>,<%= track.artist %>">
+                <label><%= track.name %> by <%= track.artist %></label>
+            </div>
         <% }); %>
-    </ul>
+        <button type="submit">Save Selected Tracks</button>
+    </form>
+    
 <% } %>
 
 <%- include("./partials/footer.ejs") %>

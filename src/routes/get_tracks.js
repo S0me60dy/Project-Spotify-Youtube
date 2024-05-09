@@ -2,12 +2,23 @@
 
 import express from "express"
 import axios from "axios"
-import session from "express-session";
+import session from "express-session"
+import dotenv from 'dotenv'
+import passport from "passport"
+import bodyParser from "body-parser"
+
+dotenv.config();
+const app = express();
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const getTracksRouter = express.Router()
 
 getTracksRouter.use(session({
-    secret: '123',
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: true, 
     cookie: { secure: false }
@@ -38,8 +49,6 @@ getTracksRouter.get('/playlist-tracks/:playlistId', async (req, res) => {
                 artist: item.track.artists.map(artist => artist.name).join(', ')
             }));
 
-            //console.log(req.session.tracks);
-
             res.render('tracks.ejs', {tracks: req.session.tracks});
         })
     } catch(error){
@@ -47,5 +56,17 @@ getTracksRouter.get('/playlist-tracks/:playlistId', async (req, res) => {
         res.status(500).send('Failed to fetch tracks');
     }
 })
+
+getTracksRouter.post('/save-tracks', (req, res) => {
+    const selectedTracks = req.body.selectedTracks || [];
+    // Ensure selectedTracks is always an array
+    session.selectedTracks = selectedTracks.map(trackString => {
+        const [name, artist] = trackString.split(',');
+        return { name, artist };
+    });
+    console.log(session.selectedTracks);
+    res.redirect('/api/auth/'); // Redirect or handle the flow as needed
+});
+
 
 export default getTracksRouter;
